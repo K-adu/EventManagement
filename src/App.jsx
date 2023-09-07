@@ -6,7 +6,7 @@ import Register from './Pages/Register/Register';
 import HomePage from './Pages/HomePage/HomePage';
 import Create from './Pages/Events/Create';
 function App() {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
