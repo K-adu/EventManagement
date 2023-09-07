@@ -1,6 +1,10 @@
 import { Button, Typography, Box } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function SubmitForm() {
+  const values = useSelector((state) => state.userInfo);
+  console.log('this is from the submit ', values);
+  const signUpHander = (values) => {};
   return (
     <Box sx={{ position: 'relative', textAlign: 'center' }}>
       <Typography variant="h2" color="primary">
@@ -23,6 +27,7 @@ export default function SubmitForm() {
         variant="contained"
         color="primary"
         sx={{ position: 'relative', zIndex: 1, marginTop: '20px' }}
+        onClick={signUpHander}
       >
         SignUp
       </Button>

@@ -16,8 +16,8 @@ export default function UserWork() {
 
   const Formik = useFormik({
     initialValues: {
-      Country: '',
-      Occupation: '',
+      country: '',
+      occupation: '',
       age: '',
     },
     validationSchema: ValidationSchema,
