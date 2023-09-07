@@ -22,7 +22,6 @@ export default function Login() {
 
   return (
     <>
-      <NavBar />
       <main>
         <div
           style={{
