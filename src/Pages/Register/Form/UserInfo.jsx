@@ -42,7 +42,7 @@ export default function UserInfo() {
     >
       <Grid item>
         <Typography variant="h4" gutterBottom>
-          User Information
+          Register User
         </Typography>
       </Grid>
       <Grid item>
