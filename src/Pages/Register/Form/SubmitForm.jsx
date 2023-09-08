@@ -1,13 +1,21 @@
 import { Button, Typography, Box } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { createNewUser } from '../../../services/Signup';
-
+import { useNavigate } from 'react-router-dom';
 export default function SubmitForm() {
+  const navigate = useNavigate();
   const values = useSelector((state) => state.userInfo);
   const signUpHander = async (event) => {
     try {
       console.log('this is from the hadnelr', values);
-      await createNewUser(values);
+      const response = await createNewUser(values);
+      if (response.status === 201) {
+        alert('Signup Successful');
+
+        navigate('/');
+      } else {
+        alert('Unexpected response from the server');
+      }
     } catch (error) {
       console.log(error);
     }

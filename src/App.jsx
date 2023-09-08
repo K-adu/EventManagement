@@ -10,11 +10,9 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        {!isLoggedIn ? (
-          <Route index element={<Login />} />
-        ) : (
-          <Route index element={<HomePage />} />
-        )}
+        <Route index element={<Login />} />
+        <Route path="/homepage" element={<HomePage />} />
+
         <Route path="/register" element={<Register />} />
         <Route path="/create" element={<Create />} />
       </Route>

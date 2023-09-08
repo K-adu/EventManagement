@@ -1,9 +1,13 @@
 import * as yup from 'yup';
 import { useFormik } from 'formik';
+import axios from 'axios';
 import NavBar from '../../components/NavBar/NavBar';
 import { TextField, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { loginUser } from '../../services/Login';
+import { useNavigate } from 'react-router-dom';
 export default function Login() {
+  const navigate = useNavigate();
   const ValidationSchema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().required(),
@@ -15,8 +19,19 @@ export default function Login() {
       password: '',
     },
     validationSchema: ValidationSchema,
-    onSubmit: (values) => {
-      console.log('call axios in this part');
+    onSubmit: async (values) => {
+      try {
+        await loginUser(values);
+        const response = await axios.get('http://localhost:4000/user/profile', {
+          withCredentials: true,
+        });
+        localStorage.setItem('userInfo', JSON.stringify(response.data));
+
+        alert('user logged in success');
+        navigate('/homepage');
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 
