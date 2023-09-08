@@ -21,7 +21,6 @@ function App() {
   const userData = useSelector((state) => state.loggedIn);
   console.log(userData);
   const loggedIn = userData.loggedIn;
-  console.log('checking', loggedIn);
 
   return (
     <Routes>

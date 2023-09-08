@@ -38,7 +38,7 @@ export default function Login() {
 
         alert('user logged in success');
         dispatch(setLoggedInState(data));
-        navigate('/homepage');
+        navigate('/');
       } catch (error) {
         console.log(error);
       }
