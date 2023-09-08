@@ -1,10 +1,17 @@
 import { Button, Typography, Box } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
+import { createNewUser } from '../../../services/Signup';
 
 export default function SubmitForm() {
   const values = useSelector((state) => state.userInfo);
-  console.log('this is from the submit ', values);
-  const signUpHander = (values) => {};
+  const signUpHander = async (event) => {
+    try {
+      console.log('this is from the hadnelr', values);
+      await createNewUser(values);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Box sx={{ position: 'relative', textAlign: 'center' }}>
       <Typography variant="h2" color="primary">
