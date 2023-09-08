@@ -12,7 +12,6 @@ export const loggedInSlice = createSlice({
   initialState,
   reducers: {
     setLoggedInState: (state,action) => {
-      state.loggedIn = true
       return {...state,...action.payload}
 
     }

@@ -1,13 +1,16 @@
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import axios from 'axios';
-import NavBar from '../../components/NavBar/NavBar';
 import { TextField, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { loginUser } from '../../services/Login';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setLoggedInState } from '../../redux/LoggedInSlice';
 export default function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const ValidationSchema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().required(),
@@ -25,9 +28,16 @@ export default function Login() {
         const response = await axios.get('http://localhost:4000/user/profile', {
           withCredentials: true,
         });
-        localStorage.setItem('userInfo', JSON.stringify(response.data));
+        console.log(response);
+        const data = {
+          email: response.data.email,
+          id: response.data.id,
+          loggedIn: true,
+        };
+        localStorage.setItem('userInfo', JSON.stringify(data));
 
         alert('user logged in success');
+        dispatch(setLoggedInState(data));
         navigate('/homepage');
       } catch (error) {
         console.log(error);
