@@ -2,24 +2,26 @@ import React from 'react';
 import { Formik, Form, Field, FieldArray } from 'formik';
 import { Typography, Grid, Button, TextField, Box } from '@mui/material';
 import { useSelector } from 'react-redux';
+import { createEvent } from '../../services/events/createEvent';
 
 const eventsGroup = { title: '', description: '', priority: '' };
 
 export default function Create() {
   const sessionUserInfo = useSelector((state) => state.loggedIn);
-
   return (
     <Formik
       initialValues={{
         events: [
           {
             ...eventsGroup,
+            postedBy: sessionUserInfo.id,
           },
         ],
       }}
       onSubmit={async (values) => {
-        values.id = sessionUserInfo.id;
-        console.log(values);
+        //values.id = sessionUserInfo.id;
+        // console.log(values);
+        await createEvent(values);
         alert(JSON.stringify(values, null, 2));
       }}
     >
