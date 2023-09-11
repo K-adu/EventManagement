@@ -1,21 +1,24 @@
 import React from 'react';
 import { Formik, Form, Field, FieldArray } from 'formik';
 import { Typography, Grid, Button, TextField, Box } from '@mui/material';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { useSelector } from 'react-redux';
 
-const eventsGroup = { title: '', description: '', priority: '', date: null };
+const eventsGroup = { title: '', description: '', priority: '' };
 
 export default function Create() {
+  const sessionUserInfo = useSelector((state) => state.loggedIn);
+
   return (
     <Formik
       initialValues={{
-        events: [eventsGroup],
+        events: [
+          {
+            ...eventsGroup,
+          },
+        ],
       }}
       onSubmit={async (values) => {
-        // Remove 'actions' argument
+        values.id = sessionUserInfo.id;
         console.log(values);
         alert(JSON.stringify(values, null, 2));
       }}
@@ -36,7 +39,7 @@ export default function Create() {
                       <Field
                         fullWidth
                         name={`events.${index}.title`}
-                        component={TextField}
+                        as={TextField} // Use 'as' prop to specify the component
                         label="Title"
                         size="small"
                       />
@@ -45,7 +48,7 @@ export default function Create() {
                       <Field
                         fullWidth
                         name={`events.${index}.priority`}
-                        component={TextField}
+                        as={TextField}
                         label="Priority"
                         size="small"
                       />
@@ -54,29 +57,10 @@ export default function Create() {
                       <Field
                         fullWidth
                         name={`events.${index}.description`}
-                        component={TextField}
+                        as={TextField}
                         label="Description"
                         size="small"
                       />
-                    </Grid>
-                    <Grid item xs={12} md={2}>
-                      {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DatePicker
-                          label="Date"
-                          value={values.events[index].date}
-                          onChange={
-                            (date) => (values.events[index].date = date) // Update the date directly
-                          }
-                          renderInput={(params) => (
-                            <TextField {...params} size="small" />
-                          )}
-                        />
-                      </LocalizationProvider> */}
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DemoContainer components={['DatePicker']}>
-                          <DatePicker label="Date" />
-                        </DemoContainer>
-                      </LocalizationProvider>
                     </Grid>
                     {index > 0 && (
                       <Grid item xs={2}>
@@ -95,7 +79,11 @@ export default function Create() {
                   <Box display="flex" alignItems="center">
                     <Button
                       variant="outlined"
-                      onClick={() => push(eventsGroup)}
+                      onClick={() =>
+                        push({
+                          ...eventsGroup,
+                        })
+                      }
                     >
                       Add Another Event
                     </Button>
