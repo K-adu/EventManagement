@@ -5,6 +5,9 @@ import { TextField, Button, Typography, Grid } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUserInfo } from '../../../redux/userInfoSlice';
 import { increment } from '../../../redux/counterSlice';
+import CountrySelect from './country';
+
+
 export default function UserWork() {
   const dispatch = useDispatch();
   const activeStepIndex = useSelector((state) => state.counter.value);
@@ -44,18 +47,12 @@ export default function UserWork() {
       </Grid>
       <Grid item>
         <form onSubmit={Formik.handleSubmit} style={{ width: '300px' }}>
-          <TextField
-            fullWidth
-            id="country"
-            name="country"
-            label="country"
-            value={Formik.values.country}
-            onChange={Formik.handleChange}
-            onBlur={Formik.handleBlur}
-            error={Formik.touched.country && Boolean(Formik.errors.country)}
-            helperText={Formik.touched.country && Formik.errors.country}
-            style={{ marginBottom: '20px' }} // Add margin to create space
-          />
+        <Grid container direction="column" spacing={2}>
+        <Grid item>
+          <CountrySelect />
+        </Grid>
+
+        <Grid item> 
           <TextField
             fullWidth
             id="occupation"
@@ -70,6 +67,9 @@ export default function UserWork() {
             helperText={Formik.touched.occupation && Formik.errors.occupation}
             style={{ marginBottom: '20px' }} // Add margin to create space
           />
+          </Grid>
+          </Grid>
+          <Grid item>
           <TextField
             fullWidth
             id="age"
@@ -82,6 +82,7 @@ export default function UserWork() {
             helperText={Formik.touched.age && Formik.errors.age}
             style={{ marginBottom: '20px' }} // Add margin to create space
           />
+          </Grid>
           <Button
             color="primary"
             variant="contained"
