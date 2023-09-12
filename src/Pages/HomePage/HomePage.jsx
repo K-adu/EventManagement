@@ -3,7 +3,7 @@ import { fetchEvents } from '../../services/events/getEvents';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react'; // Import useState
 import { addEvent } from '../../redux/eventInfoSlice';
-
+import './homepage.css';
 export default function HomePage() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true); // Add loading state
@@ -43,7 +43,11 @@ export default function HomePage() {
   // ];
   return (
     <>
-      <EventCard events={eventsInfo} />
+      <div className="event-card-container">
+        {eventsInfo.map((event) => (
+          <EventCard key={event._id} events={[event]} />
+        ))}
+      </div>
     </>
   );
 }

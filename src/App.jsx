@@ -14,7 +14,7 @@ import Cookies from 'js-cookie';
 function App() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     async function userProfile() {
       const response = await axios.get('http://localhost:4000/user/profile', {
         withCredentials: true,
@@ -32,7 +32,7 @@ function App() {
       // Dispatch an action to set the logged-in state based on the presence of the cookie
     }
     const accessToken = Cookies.get('access_token'); // Read the 'access_token' cookie
-    console.log(accessToken);
+
     if (accessToken) {
       // Fetch user profile data only if there's an access token
 
@@ -44,15 +44,14 @@ function App() {
 
   const userData = useSelector((state) => state.loggedIn);
   const loggedIn = userData.loggedIn;
-  console.log('this is logged in', loggedIn);
 
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        {!loggedIn ? (
-          <Route index element={<Login />} />
-        ) : (
+        {loggedIn ? (
           <Route index element={<HomePage />} />
+        ) : (
+          <Route index element={<Login />} />
         )}
         <Route path="/register" element={<Register />} />
         <Route path="/create" element={<Create />} />

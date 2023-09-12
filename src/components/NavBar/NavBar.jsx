@@ -10,7 +10,6 @@ import NavBarUserDetails from './NavBarUserDetails';
 
 export default function NavBar() {
   const userData = useSelector((state) => state.loggedIn);
-  console.log(userData);
   const isLoggedIn = userData.loggedIn;
 
   return (

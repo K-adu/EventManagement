@@ -5,13 +5,13 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { useSelector } from 'react-redux';
 
 export default function EventCard(props) {
-  console.log(props);
-
+  const eventEditHandler = (event) => {
+    console.log('this is from the evnet edit handler', event);
+  };
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
       {props.events.flatMap((eventArray, index) =>
         eventArray.map((event) => (
           <Card key={event._id} sx={{ minWidth: 275 }}>
@@ -20,23 +20,26 @@ export default function EventCard(props) {
                 sx={{ fontSize: 14 }}
                 color="text.secondary"
                 gutterBottom
-              >
-                Here will be the date of the event
-              </Typography>
+              ></Typography>
               <Typography variant="h5" component="div">
                 {event.title}
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                {event.priority}
+                Priority-{event.priority}
               </Typography>
               <Typography variant="body2">
                 {event.description}
                 <br />
-                {event.description}
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">Edit</Button>
+              <Button
+                size="small"
+                value={event._id}
+                onClick={() => eventEditHandler(event)}
+              >
+                Edit
+              </Button>
               <Button size="small">Delete</Button>
             </CardActions>
           </Card>

@@ -1,57 +1,31 @@
-import Menu from '@mui/material/Menu';
-import Avatar from '@mui/material/Avatar';
 import * as React from 'react';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
 import Box from '@mui/material/Box';
-
-import MenuItem from '@mui/material/MenuItem';
+import { useSelector, useDispatch } from 'react-redux';
 import Typography from '@mui/material/Typography';
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import Button from '@mui/material/Button'; // Import your action here
+import { Link } from '@mui/material';
+import axios from 'axios';
 export default function NavBarUserDetails(props) {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const handleOpenUserMenu = (event) => {
-    console.log('this is triggered');
-    setAnchorElUser(event.currentTarget);
+  const userInfo = useSelector((value) => value.loggedIn);
+  //const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    await axios.post('http://localhost:4000/auth/logout');
+    // Dispatch an action to set the logged-in state to false or perform other logout actions
+    //dispatch(setLoggedInState(false)); // Example action to set logged-in state to false
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
   return (
-    <Box sx={{ flexGrow: 0 }}>
-      <Tooltip title="Open settings">
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-        </IconButton>
-      </Tooltip>
-      <Menu
-        sx={{ mt: '45px' }}
-        id="menu-appbar"
-        anchorEl={anchorElUser}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        open={Boolean(anchorElUser)}
-        onClose={handleCloseUserMenu}
+    <Box sx={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+      <Typography>{userInfo.email}</Typography>
+      <Link
+        onClick={handleLogout}
+        color=""
+        underline="hover"
+        // style={{ cursor: 'pointer' }}
       >
-        {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">{setting}</Typography>
-          </MenuItem>
-        ))}
-      </Menu>
+        LogOut
+      </Link>
     </Box>
   );
 }
