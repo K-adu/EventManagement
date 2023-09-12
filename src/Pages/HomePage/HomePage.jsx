@@ -24,10 +24,26 @@ export default function HomePage() {
 
     fetchAndSetEvents();
   }, [dispatch]);
-
+  let eventsInfo = useSelector((state) => state.eventInfo);
+  //eventsInfo = [...eventsInfo];
+  // const eventsInfo = [
+  //   {
+  //     _id: 1,
+  //     title: 'Event 1',
+  //     priority: 'High',
+  //     description: 'Description 1',
+  //   },
+  //   {
+  //     _id: 2,
+  //     title: 'Event 2',
+  //     priority: 'Medium',
+  //     description: 'Description 2',
+  //   },
+  //   // Add more events with unique _id values
+  // ];
   return (
     <>
-      <h1>hello world</h1>
+      <EventCard events={eventsInfo} />
     </>
   );
 }
