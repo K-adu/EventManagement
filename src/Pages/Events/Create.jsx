@@ -8,6 +8,7 @@ const eventsGroup = { title: '', description: '', priority: '' };
 
 export default function Create() {
   const sessionUserInfo = useSelector((state) => state.loggedIn);
+  console.log('this issession userInfo', sessionUserInfo);
   return (
     <Formik
       initialValues={{
