@@ -1,14 +1,23 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
+import EditEventDialog from './EditEventDialog';
 export default function EventCard(props) {
+  const [openEditDialog, setOpenEditDialog] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const eventEditHandler = (event) => {
+    setSelectedEvent(event);
+    setOpenEditDialog(true);
     console.log('this is from the evnet edit handler', event);
+  };
+  const handleEdit = (editedEvent) => {
+    // Implement your edit logic here and pass it the editedEvent data
+    console.log('Edited Event:', editedEvent);
   };
   return (
     <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
@@ -44,6 +53,14 @@ export default function EventCard(props) {
             </CardActions>
           </Card>
         ))
+      )}
+      {selectedEvent && (
+        <EditEventDialog
+          open={openEditDialog}
+          handleClose={() => setOpenEditDialog(false)}
+          event={selectedEvent}
+          handleEdit={handleEdit}
+        />
       )}
     </div>
   );
