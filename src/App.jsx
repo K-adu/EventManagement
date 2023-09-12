@@ -8,20 +8,34 @@ import HomePage from './Pages/HomePage/HomePage';
 import Create from './Pages/Events/Create';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoggedInState } from './redux/LoggedInSlice';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 function App() {
   const dispatch = useDispatch();
-  let data;
+
   useEffect(() => {
-    const storedData = localStorage.getItem('userInfo');
-    if (storedData) {
-      data = JSON.parse(storedData);
-      dispatch(setLoggedInState(data));
+    const accessToken = Cookies.get('access_token'); // Read the 'access_token' cookie
+    async function userProfile() {
+      const response = await axios.get('http://localhost:4000/user/profile', {
+        withCredentials: true,
+      });
+      console.log(response);
+      const data = {
+        email: response.data.email,
+        id: response.data.id,
+        loggedIn: true,
+      };
+      localStorage.setItem('userInfo', JSON.stringify(data));
+    }
+    if (accessToken) {
+      // Dispatch an action to set the logged-in state based on the presence of the cookie
+      dispatch(setLoggedInState(true));
     }
   }, [dispatch]);
+
   const userData = useSelector((state) => state.loggedIn);
   console.log(userData);
   const loggedIn = userData.loggedIn;
-
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
