@@ -15,7 +15,6 @@ export default function EditEventDialog({
   event,
   handleEdit,
 }) {
-  const navigate = useNavigate();
   const [editedEvent, setEditedEvent] = useState({ ...event });
   const postDetails = useSelector((state) => state.editEvent);
   console.log('this is from the eedit event dialogue', postDetails._id);
@@ -31,7 +30,6 @@ export default function EditEventDialog({
         withCredentials: true,
       });
       alert('event updated success');
-      navigate('/');
     } catch (e) {
       console.log(
         'this is the error form the update handelsave editeventdialogue',
@@ -63,7 +61,7 @@ export default function EditEventDialog({
           id="priority"
           name="priority"
           label="Priority"
-          type="number"
+          type="text"
           fullWidth
           value={editedEvent.priority}
           onChange={handleInputChange}

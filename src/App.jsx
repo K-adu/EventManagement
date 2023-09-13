@@ -12,6 +12,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 function App() {
+  //const accessToken = Cookies.get('access_token');
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
@@ -41,7 +42,6 @@ function App() {
 
     // userProfile();
   }, [dispatch]);
-
   const userData = useSelector((state) => state.loggedIn);
   const loggedIn = userData.loggedIn;
 
