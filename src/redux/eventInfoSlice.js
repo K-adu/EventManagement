@@ -11,12 +11,6 @@ const eventInfoSlice = createSlice({
 
       state.push(action.payload);
     },
-    updateEvent: (state, action) => {
-      const updatedEventIndex = state.findIndex((event) => event.id === action.payload.id);
-      if (updatedEventIndex !== -1) {
-        state[updatedEventIndex] = action.payload;
-      }
-    },
     deleteEvent: (state, action) => {
       const eventIndexToDelete = state.findIndex((event) => event.id === action.payload);
       if (eventIndexToDelete !== -1) {
