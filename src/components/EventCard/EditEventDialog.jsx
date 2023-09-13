@@ -6,22 +6,39 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 export default function EditEventDialog({
   open,
   handleClose,
   event,
   handleEdit,
 }) {
+  const navigate = useNavigate();
   const [editedEvent, setEditedEvent] = useState({ ...event });
-
+  const postDetails = useSelector((state) => state.editEvent);
+  console.log('this is from the eedit event dialogue', postDetails._id);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEditedEvent({ ...editedEvent, [name]: value });
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     handleEdit(editedEvent);
+    try {
+      await axios.patch('http://localhost:4000/events/update', editedEvent, {
+        withCredentials: true,
+      });
+      alert('event updated success');
+      navigate('/');
+    } catch (e) {
+      console.log(
+        'this is the error form the update handelsave editeventdialogue',
+        e
+      );
+    }
+    console.log('this is from the edit event handel edit', editedEvent);
     handleClose();
   };
 

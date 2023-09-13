@@ -7,13 +7,17 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import EditEventDialog from './EditEventDialog';
+import { useDispatch } from 'react-redux';
+import { editEvent } from '../../redux/editEventSlice';
 export default function EventCard(props) {
+  const dispatch = useDispatch();
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const eventEditHandler = (event) => {
     setSelectedEvent(event);
     setOpenEditDialog(true);
-    console.log('this is from the evnet edit handler', event);
+    console.log('this is from the event edit handler', event);
+    dispatch(editEvent(event));
   };
   const handleEdit = (editedEvent) => {
     // Implement your edit logic here and pass it the editedEvent data
