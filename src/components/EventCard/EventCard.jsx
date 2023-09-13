@@ -9,6 +9,8 @@ import Typography from '@mui/material/Typography';
 import EditEventDialog from './EditEventDialog';
 import { useDispatch, useSelector } from 'react-redux';
 import { editEvent } from '../../redux/editEventSlice';
+import axios from 'axios';
+import { incrementToRender } from '../../redux/counterSlice';
 export default function EventCard(props) {
   const dispatch = useDispatch();
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -17,6 +19,14 @@ export default function EventCard(props) {
     setSelectedEvent(event);
     setOpenEditDialog(true);
     dispatch(editEvent(event));
+  };
+  const eventDeleteHandler = async (event) => {
+    console.log(event);
+    const url = `http://localhost:4000/events/delete/${event._id}`;
+    await axios.delete(url, {
+      withCredentials: true,
+    });
+    dispatch(incrementToRender());
   };
   const handleEdit = (editedEvent) => {
     console.log('Edited Event:', editedEvent);
@@ -53,7 +63,13 @@ export default function EventCard(props) {
                 >
                   Edit
                 </Button>
-                <Button size="small">Delete</Button>
+                <Button
+                  size="small"
+                  value={event._id}
+                  onClick={() => eventDeleteHandler(event)}
+                >
+                  Delete
+                </Button>
               </CardActions>
             </Card>
           ))
