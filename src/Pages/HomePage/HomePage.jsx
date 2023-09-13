@@ -7,7 +7,7 @@ import './homepage.css';
 export default function HomePage() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true); // Add loading state
-
+  const renderValue = useSelector((state) => state.counter.render);
   useEffect(() => {
     async function fetchAndSetEvents() {
       try {
@@ -23,7 +23,7 @@ export default function HomePage() {
     }
 
     fetchAndSetEvents();
-  }, [dispatch]);
+  }, [dispatch, renderValue]);
   let eventsInfo = useSelector((state) => state.eventInfo);
   //eventsInfo = [...eventsInfo];
   // const eventsInfo = [
@@ -47,7 +47,9 @@ export default function HomePage() {
         {eventsInfo.map((event) => (
           <EventCard key={event._id} events={[event]} />
         ))}
+        {/* <EventCard events={[eventsInfo]} /> */}
       </div>
+      <h1>this is checking of render</h1>
     </>
   );
 }

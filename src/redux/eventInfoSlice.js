@@ -8,7 +8,7 @@ const eventInfoSlice = createSlice({
   initialState,
   reducers: {
     addEvent: (state, action) => {
-
+      state.pop()
       state.push(action.payload);
     },
     deleteEvent: (state, action) => {
