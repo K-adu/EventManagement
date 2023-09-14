@@ -7,5 +7,6 @@ export async function loginUser(data) {
 
   } catch (error) {
     console.log(error)
+    alert('Email and password didnot matched')
   }
 }

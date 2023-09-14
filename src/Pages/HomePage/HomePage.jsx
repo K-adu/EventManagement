@@ -49,7 +49,6 @@ export default function HomePage() {
         ))}
         {/* <EventCard events={[eventsInfo]} /> */}
       </div>
-      <h1>this is checking of render</h1>
     </>
   );
 }
