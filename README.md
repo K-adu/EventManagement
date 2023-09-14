@@ -2,13 +2,13 @@
 
 ### MaterialUI based User Interface
 
-Features:
-Login
-Register-(Stepper Form- Formik)
-Create Event-(Dynamic Form, Formik-FieldArray)
-Read the Event
-Edit the Event-(Dialogue Based Event Editor)
-Delete The Event
+## Features:
+### Login
+### Register-(Stepper Form- Formik)
+### Create Event-(Dynamic Form, Formik-FieldArray)
+### Read the Event
+### Edit the Event-(Dialogue Based Event Editor)
+### Delete The Event
 
 <img src="./Assets/1.png">
 <img src="./Assets/2.png">
