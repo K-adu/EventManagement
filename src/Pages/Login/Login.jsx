@@ -40,6 +40,7 @@ export default function Login() {
         dispatch(setLoggedInState(data));
         navigate('/');
       } catch (error) {
+        alert('Incorrect Email or Password');
         console.log(error);
       }
     },
