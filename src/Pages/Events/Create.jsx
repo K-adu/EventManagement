@@ -5,19 +5,20 @@ import { useSelector } from 'react-redux';
 import { createEvent } from '../../services/events/createEvent';
 
 const eventsGroup = { title: '', description: '', priority: '' };
-
 export default function Create() {
   const sessionUserInfo = useSelector((state) => state.loggedIn);
+  const initialEvents = [
+    {
+      ...eventsGroup,
+      postedBy: sessionUserInfo.id,
+    },
+    // Add more events as needed
+  ];
   console.log('this issession userInfo', sessionUserInfo);
   return (
     <Formik
       initialValues={{
-        events: [
-          {
-            ...eventsGroup,
-            postedBy: sessionUserInfo.id,
-          },
-        ],
+        events: initialEvents,
       }}
       onSubmit={async (values) => {
         //values.id = sessionUserInfo.id;
@@ -85,6 +86,7 @@ export default function Create() {
                       onClick={() =>
                         push({
                           ...eventsGroup,
+                          postedBy: sessionUserInfo.id,
                         })
                       }
                     >
