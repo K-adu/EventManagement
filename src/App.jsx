@@ -11,6 +11,7 @@ import { setLoggedInState } from './redux/LoggedInSlice';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import CreateDiary from './Pages/Diary/createDiary';
+import DisplayDiary from './Pages/Diary/displayDiary';
 
 function App() {
   //const accessToken = Cookies.get('access_token');
@@ -57,6 +58,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/create" element={<Create />} />
         <Route path="/createDiary" element={<CreateDiary />} />
+        <Route path="/showDiary" element={<DisplayDiary />} />
       </Route>
     </Routes>
   );

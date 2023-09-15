@@ -16,7 +16,7 @@ export default function NavBarMethods() {
             Describe your Day
           </Typography>
         </Link>
-        <Link to="/Previous" style={{ textDecoration: 'none' }}>
+        <Link to="/showDiary" style={{ textDecoration: 'none' }}>
           <Typography color="white" variant="h8" sx={{ margin: '0 10px' }}>
             Show Diary
           </Typography>
