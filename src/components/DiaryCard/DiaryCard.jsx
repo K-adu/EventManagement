@@ -100,6 +100,19 @@ export default function DiaryCard(props) {
     setOpenReadDialog(false);
   };
 
+  const formatDate = (dateString) => {
+    const options = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    };
+    const date = new Date(dateString);
+    return date.toLocaleString(undefined, options);
+  };
+
   return (
     <>
       <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
@@ -112,7 +125,7 @@ export default function DiaryCard(props) {
                   color="text.secondary"
                   gutterBottom
                 >
-                  {diary.description}
+                  Created At: {formatDate(diary.createdAt)}
                 </Typography>
               </CardContent>
               <CardActions>
