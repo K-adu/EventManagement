@@ -11,14 +11,14 @@ export default function NavBarMethods() {
             Create New Event
           </Typography>
         </Link>
-        <Link to="/upcoming" style={{ textDecoration: 'none' }}>
+        <Link to="/createDiary" style={{ textDecoration: 'none' }}>
           <Typography color="white" variant="h8" sx={{ margin: '0 10px' }}>
-            Upcoming Events
+            Describe your Day
           </Typography>
         </Link>
         <Link to="/Previous" style={{ textDecoration: 'none' }}>
           <Typography color="white" variant="h8" sx={{ margin: '0 10px' }}>
-            Previous
+            Show Diary
           </Typography>
         </Link>
       </Box>
