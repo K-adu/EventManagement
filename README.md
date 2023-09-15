@@ -1,20 +1,7 @@
 ## This is the client side application for a event management application
 
-### MaterialUI based User Interface
-
-## Features:
-
-### Login
-
-### Register-(Stepper Form- Formik)
-
-### Create Event-(Dynamic Form, Formik-FieldArray)
-
-### Read the Event
-
-### Edit the Event-(Dialogue Based Event Editor)
-
-### Delete The Event
+The backend is written in nestJs and is available here
+https://github.com/K-adu/EventManagement-Server-Side
 
 <img src="./Assets/1.png">
 <img src="./Assets/2.png">
