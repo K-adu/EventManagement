@@ -3,11 +3,17 @@
 ### MaterialUI based User Interface
 
 ## Features:
+
 ### Login
+
 ### Register-(Stepper Form- Formik)
+
 ### Create Event-(Dynamic Form, Formik-FieldArray)
+
 ### Read the Event
+
 ### Edit the Event-(Dialogue Based Event Editor)
+
 ### Delete The Event
 
 <img src="./Assets/1.png">
@@ -17,3 +23,5 @@
 <img src="./Assets/5.png">
 <img src="./Assets/6.png">
 <img src="./Assets/7.png">
+<img src="./Assets/8.png">
+<img src="./Assets/9.png">
