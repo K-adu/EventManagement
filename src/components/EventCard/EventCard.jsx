@@ -38,59 +38,67 @@ export default function EventCard(props) {
   };
 
   return (
-    <div>
-    <SearchBar onSearch={handleSearch} />
-      <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-        {props.events.flatMap((eventArray, index) =>
-          eventArray.filter((event) => {
-            return search.toLowerCase() === '' ? event : event.title.toLowerCase().includes(search) 
-          }).map((event) => (
-            <Card key={event._id} sx={{ minWidth: 275 }}>
-              <CardContent>
-                <Typography
-                  sx={{ fontSize: 14 }}
-                  color="text.secondary"
-                  gutterBottom
-                ></Typography>
-                <Typography variant="h5" component="div">
-                  {event.title}
-                </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Priority-{event.priority}
-                </Typography>
-                <Typography variant="body2">
-                  {event.description}
-                  <br />
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button
-                  size="small"
-                  value={event._id}
-                  onClick={() => eventEditHandler(event)}
-                >
-                  Edit
-                </Button>
-                <Button
-                  size="small"
-                  value={event._id}
-                  onClick={() => eventDeleteHandler(event)}
-                >
-                  Delete
-                </Button>
-              </CardActions>
-            </Card>
-          ))
-        )}
-        {selectedEvent && (
-          <EditEventDialog
-            open={openEditDialog}
-            handleClose={() => setOpenEditDialog(false)}
-            event={selectedEvent}
-            handleEdit={handleEdit}
-          />
-        )}
+    <>
+      <SearchBar onSearch={handleSearch} />
+      <div>
+        <div
+          style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}
+        >
+          {props.events.flatMap((eventArray, index) =>
+            eventArray
+              .filter((event) => {
+                return search.toLowerCase() === ''
+                  ? event
+                  : event.title.toLowerCase().includes(search.toLowerCase());
+              })
+              .map((event) => (
+                <Card key={event._id} sx={{ minWidth: 275 }}>
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 14 }}
+                      color="text.secondary"
+                      gutterBottom
+                    ></Typography>
+                    <Typography variant="h5" component="div">
+                      {event.title}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      Priority-{event.priority}
+                    </Typography>
+                    <Typography variant="body2">
+                      {event.description}
+                      <br />
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      size="small"
+                      value={event._id}
+                      onClick={() => eventEditHandler(event)}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      size="small"
+                      value={event._id}
+                      onClick={() => eventDeleteHandler(event)}
+                    >
+                      Delete
+                    </Button>
+                  </CardActions>
+                </Card>
+              ))
+          )}
+          {selectedEvent && (
+            <EditEventDialog
+              open={openEditDialog}
+              handleClose={() => setOpenEditDialog(false)}
+              event={selectedEvent}
+              handleEdit={handleEdit}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
