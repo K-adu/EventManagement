@@ -1,5 +1,5 @@
 import { Step, StepLabel, Stepper } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 export default function MaterialStepper() {
   const activeStepIndex = useSelector((state) => state.counter.value);
   return (

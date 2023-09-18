@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './Pages/Login/Login';
 import { useEffect, useLayoutEffect } from 'react';
+
 import Layout from './layout/Layout';
 import Register from './Pages/Register/Register';
 import HomePage from './Pages/HomePage/HomePage';

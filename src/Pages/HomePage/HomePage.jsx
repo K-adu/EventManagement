@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react'; // Import useState
 import { addEvent } from '../../redux/eventInfoSlice';
 import './homepage.css';
+import { Grid } from '@mui/material';
+import SearchBar from './searchbar';
+
 export default function HomePage() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true); // Add loading state
@@ -41,6 +44,7 @@ export default function HomePage() {
   //   },
   //   // Add more events with unique _id values
   // ];
+
   return (
     <>
       <div className="event-card-container">
