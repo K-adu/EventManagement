@@ -26,27 +26,18 @@ export default function SearchBar({ onSearch }) {
         `http://localhost:4000/events/?keyword=${search}`,
         { withCredentials: true }
       );
-      console.log(response);
-      setOptions(response || []);
+      setOptions(response.data || []);
       setLoading(false);
-      // fetch(``)
-      // .then((response) => response.json())
-      // .then((data) => {
-      //   setOptions(data || []);
-      //   setLoading(false);
-      // })
-      // .catch((error) => {
-      //   console.error(error);
-      //   setLoading(false);
-      // });
     }
     callSearchApi(search);
+    console.log(options);
   }, [search]);
 
   return (
     <Autocomplete
       id="search"
-      options={![options] ? [{ label: 'Loading...', id: 0 }] : [options]}
+      // options={![options] ? [{ label: 'Loading...', id: 0 }] : [options]}
+      options={options}
       getOptionLabel={(option) => option.title || ''}
       style={{ width: '100%' }}
       renderInput={(params) => (
