@@ -1,9 +1,16 @@
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import NavBar from '../../components/NavBar/NavBar';
+import axios from 'axios';
 import { TextField, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { loginUser } from '../../services/Login';
+import { useNavigate } from 'react-router-dom';
+import {  useDispatch } from 'react-redux';
+import { setLoggedInState } from '../../redux/LoggedInSlice';
 export default function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const ValidationSchema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().required(),
@@ -15,8 +22,27 @@ export default function Login() {
       password: '',
     },
     validationSchema: ValidationSchema,
-    onSubmit: (values) => {
-      console.log('call axios in this part');
+    onSubmit: async (values) => {
+      try {
+        await loginUser(values);
+        const response = await axios.get('http://localhost:4000/user/profile', {
+          withCredentials: true,
+        });
+        console.log(response);
+        const data = {
+          email: response.data.email,
+          id: response.data.id,
+          loggedIn: true,
+        };
+        localStorage.setItem('userInfo', JSON.stringify(data));
+
+        alert('user logged in success');
+        dispatch(setLoggedInState(data));
+        navigate('/');
+      } catch (error) {
+        alert('Incorrect Email or Password');
+        console.log(error);
+      }
     },
   });
 

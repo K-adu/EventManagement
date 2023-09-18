@@ -3,12 +3,14 @@ import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
+import { useSelector } from 'react-redux';
 
 import NavBarMethods from './NavBarMethods';
 import NavBarUserDetails from './NavBarUserDetails';
 
 export default function NavBar() {
-  const isLoggedIn = true;
+  const userData = useSelector((state) => state.loggedIn);
+  const isLoggedIn = userData.loggedIn;
 
   return (
     <AppBar position="static">

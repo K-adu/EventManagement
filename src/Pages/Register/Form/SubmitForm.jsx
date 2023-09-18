@@ -1,10 +1,25 @@
 import { Button, Typography, Box } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
-
+import { useSelector } from 'react-redux';
+import { createNewUser } from '../../../services/Signup';
+import { useNavigate } from 'react-router-dom';
 export default function SubmitForm() {
+  const navigate = useNavigate();
   const values = useSelector((state) => state.userInfo);
-  console.log('this is from the submit ', values);
-  const signUpHander = (values) => {};
+  const signUpHander = async (event) => {
+    try {
+      console.log('this is from the hadnelr', values);
+      const response = await createNewUser(values);
+      if (response.status === 201) {
+        alert('Signup Successful');
+
+        navigate('/');
+      } else {
+        alert('Unexpected response from the server');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Box sx={{ position: 'relative', textAlign: 'center' }}>
       <Typography variant="h2" color="primary">
