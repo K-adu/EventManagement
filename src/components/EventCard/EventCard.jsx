@@ -22,24 +22,25 @@ export default function EventCard(props) {
     dispatch(editEvent(event));
   };
   const eventDeleteHandler = async (event) => {
-    console.log(event);
     const url = `http://localhost:4000/events/delete/${event._id}`;
     await axios.delete(url, {
       withCredentials: true,
     });
     dispatch(incrementToRender());
   };
-  const handleEdit = (editedEvent) => {
-    console.log('Edited Event:', editedEvent);
-  };
 
   const [search, setSearch] = useState('');
   const handleSearch = (searchText) => {
     setSearch(searchText);
   };
+  const closeEditDialog = () => {
+    setOpenEditDialog(false);
+    dispatch(incrementToRender());
+  };
 
   return (
     <>
+      <br />
       <SearchBar onSearch={handleSearch} />
       <div>
         <div
@@ -93,9 +94,8 @@ export default function EventCard(props) {
           {selectedEvent && (
             <EditEventDialog
               open={openEditDialog}
-              handleClose={() => setOpenEditDialog(false)}
+              handleClose={closeEditDialog}
               event={selectedEvent}
-              handleEdit={handleEdit}
             />
           )}
         </div>

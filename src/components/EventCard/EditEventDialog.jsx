@@ -6,28 +6,21 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import counterSlice, { incrementToRender } from '../../redux/counterSlice';
+import { incrementToRender } from '../../redux/counterSlice';
 
-export default function EditEventDialog({
-  open,
-  handleClose,
-  event,
-  handleEdit,
-}) {
+export default function EditEventDialog({ open, handleClose, event }) {
   const dispatch = useDispatch();
   const [editedEvent, setEditedEvent] = useState({ ...event });
-  const postDetails = useSelector((state) => state.editEvent);
-
+  console.log(event);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setEditedEvent({ ...editedEvent, [name]: value });
+    const updatedEvent = { ...event, [name]: value };
+    setEditedEvent(updatedEvent);
   };
 
   const handleSave = async () => {
-    handleEdit(editedEvent);
     try {
       await axios.patch('http://localhost:4000/events/update', editedEvent, {
         withCredentials: true,
@@ -35,11 +28,10 @@ export default function EditEventDialog({
       dispatch(incrementToRender());
     } catch (e) {
       console.log(
-        'this is the error form the update handelsave editeventdialogue',
+        'This is the error from the update handleSave in EditEventDialog',
         e
       );
     }
-    console.log('this is from the edit event handel edit', editedEvent);
     handleClose();
   };
 
@@ -56,7 +48,7 @@ export default function EditEventDialog({
           label="Title"
           type="text"
           fullWidth
-          value={editedEvent.title}
+          value={editedEvent.title} // Use editedEvent for input value
           onChange={handleInputChange}
         />
         <TextField
@@ -66,7 +58,7 @@ export default function EditEventDialog({
           label="Priority"
           type="text"
           fullWidth
-          value={editedEvent.priority}
+          value={editedEvent.priority} // Use editedEvent for input value
           onChange={handleInputChange}
         />
         <TextField
@@ -78,7 +70,7 @@ export default function EditEventDialog({
           fullWidth
           multiline
           rows={4}
-          value={editedEvent.description}
+          value={editedEvent.description} // Use editedEvent for input value
           onChange={handleInputChange}
         />
       </DialogContent>

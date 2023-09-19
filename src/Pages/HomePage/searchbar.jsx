@@ -36,7 +36,6 @@ export default function SearchBar({ onSearch }) {
   return (
     <Autocomplete
       id="search"
-      // options={![options] ? [{ label: 'Loading...', id: 0 }] : [options]}
       options={options}
       getOptionLabel={(option) => option.title || ''}
       style={{ width: '100%' }}
