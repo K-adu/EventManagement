@@ -1,12 +1,12 @@
 import DiaryCard from '../../components/DiaryCard/DiaryCard';
 import { fetchDiary } from '../../services/events/getDiary';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react'; // Import useState
+import { useEffect, useState } from 'react';
 import { addDiary } from '../../redux/diaryInfoSlice';
 import './displaydiary.css';
 export default function DisplayDiary() {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
   const renderValue = useSelector((state) => state.counter.render);
   useEffect(() => {
     async function fetchAndSetDiary() {
@@ -18,7 +18,7 @@ export default function DisplayDiary() {
       } catch (error) {
         console.error('Error fetching diaries:', error);
       } finally {
-        setLoading(false); // Set loading to false when the data is loaded or an error occurs
+        setLoading(false);
       }
     }
 

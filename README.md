@@ -8,6 +8,7 @@ https://github.com/K-adu/EventManagement-Server-Side
 <img src="./Assets/3.png">
 <img src="./Assets/4.png">
 <img src="./Assets/5.png">
+<img src="./Assets/5.1.png">
 <img src="./Assets/6.png">
 <img src="./Assets/7.png">
 <img src="./Assets/8.png">

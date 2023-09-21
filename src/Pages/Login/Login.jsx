@@ -55,7 +55,7 @@ export default function Login() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            minHeight: '60vh', // Increase the height to vertically center the content better
+            minHeight: '60vh',
           }}
         >
           <Typography variant="h3" style={{ marginBottom: '20px' }}>

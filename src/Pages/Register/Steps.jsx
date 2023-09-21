@@ -1,5 +1,4 @@
 import SubmitForm from './Form/SubmitForm';
-import ProfilePic from './Form/SubmitForm';
 import UserInfo from './Form/UserInfo';
 import UserWork from './Form/UserWork';
 import { useSelector, useDispatch } from 'react-redux';

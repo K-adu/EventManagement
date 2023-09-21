@@ -13,13 +13,15 @@ import { incrementToRender } from '../../redux/counterSlice';
 export default function EditEventDialog({ open, handleClose, event }) {
   const dispatch = useDispatch();
   const [editedEvent, setEditedEvent] = useState({ ...event });
-  console.log(event);
+
+  //handing the change when editing the value and calling the state hook
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     const updatedEvent = { ...event, [name]: value };
     setEditedEvent(updatedEvent);
   };
 
+  // calling the update api route to save the edited event
   const handleSave = async () => {
     try {
       await axios.patch('http://localhost:4000/events/update', editedEvent, {
@@ -48,7 +50,7 @@ export default function EditEventDialog({ open, handleClose, event }) {
           label="Title"
           type="text"
           fullWidth
-          value={editedEvent.title} // Use editedEvent for input value
+          value={editedEvent.title}
           onChange={handleInputChange}
         />
         <TextField
@@ -58,7 +60,7 @@ export default function EditEventDialog({ open, handleClose, event }) {
           label="Priority"
           type="text"
           fullWidth
-          value={editedEvent.priority} // Use editedEvent for input value
+          value={editedEvent.priority}
           onChange={handleInputChange}
         />
         <TextField
@@ -70,7 +72,7 @@ export default function EditEventDialog({ open, handleClose, event }) {
           fullWidth
           multiline
           rows={4}
-          value={editedEvent.description} // Use editedEvent for input value
+          value={editedEvent.description}
           onChange={handleInputChange}
         />
       </DialogContent>
